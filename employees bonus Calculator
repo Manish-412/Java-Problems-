@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter employee number (m): ");
+        int m = sc.nextInt();
+        System.out.print("Enter employee number (n): ");
+        int n = sc.nextInt();
+        
+        if (m > n) {
+            System.out.println("Invalid range: m should be less than or equal to n");
+            return;
+        }
+        
+        long totalBonus = 0;
+        System.out.println("Even numbers and their cubes between " + m + " and " + n + ":");
+        
+        for (int i = m; i <= n; i++) {
+            if (i % 2 == 0) {
+                long cube = (long) i * i * i;
+                totalBonus += cube;
+                System.out.println("Employee " + i + ": Cube = " + cube);
+            }
+        }
+        
+        System.out.println("Total bonus for all employees: " + totalBonus);
+        sc.close();
+    }
+}
