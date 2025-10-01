@@ -1,0 +1,82 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter travel class (Economy/Business): ");
+        String travelClass = sc.nextLine();
+        
+        System.out.print("Enter passenger type (Student/Senior/Regular): ");
+        String passengerType = sc.nextLine();
+        
+        System.out.print("Enter passenger age: ");
+        int age = sc.nextInt();
+        
+        System.out.print("Enter actual baggage weight (kg): ");
+        double baggageWeight = sc.nextDouble();
+        
+        double freeAllowance = 0;
+        
+        // Determine base allowance based on travel class using nested if
+        if (travelClass.equalsIgnoreCase("Economy")) {
+            freeAllowance = 20;
+            // Check passenger type for Economy class
+            if (passengerType.equalsIgnoreCase("Student")) {
+                freeAllowance += 10;
+                System.out.println("Economy class with Student discount applied.");
+            } else if (passengerType.equalsIgnoreCase("Senior") || age >= 60) {
+                freeAllowance += 5;
+                System.out.println("Economy class with Senior Citizen discount applied.");
+            } else {
+                System.out.println("Economy class - Regular passenger.");
+            }
+        } else if (travelClass.equalsIgnoreCase("Business")) {
+            freeAllowance = 30;
+            // Check passenger type for Business class
+            if (passengerType.equalsIgnoreCase("Student")) {
+                freeAllowance += 10;
+                System.out.println("Business class with Student discount applied.");
+            } else if (passengerType.equalsIgnoreCase("Senior") || age >= 60) {
+                freeAllowance += 5;
+                System.out.println("Business class with Senior Citizen discount applied.");
+            } else {
+                System.out.println("Business class - Regular passenger.");
+            }
+        } else {
+            System.out.println("Invalid travel class! Please enter Economy or Business.");
+            sc.close();
+            return;
+        }
+        
+        // Calculate excess baggage charges using nested if
+        double excessWeight = 0;
+        double baggageCharge = 0;
+        
+        if (baggageWeight > freeAllowance) {
+            excessWeight = baggageWeight - freeAllowance;
+            baggageCharge = excessWeight * 500;
+            
+            // Nested condition for high excess baggage warning
+            if (excessWeight > 10) {
+                System.out.println("Warning: High excess baggage detected!");
+            }
+        }
+        
+        // Display results
+        System.out.println("\n--- Baggage Allowance Summary ---");
+        System.out.println("Travel Class: " + travelClass);
+        System.out.println("Passenger Type: " + passengerType + " (Age: " + age + ")");
+        System.out.println("Free Allowance: " + freeAllowance + " kg");
+        System.out.println("Actual Baggage Weight: " + baggageWeight + " kg");
+        
+        if (excessWeight > 0) {
+            System.out.println("Excess Weight: " + excessWeight + " kg");
+            System.out.println("Baggage Charge = ₹" + (int)baggageCharge);
+        } else {
+            System.out.println("Baggage Charge = 0");
+        }
+        
+        sc.close();
+    }
+}
