@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter customer area (Rural/Urban): ");
+        String area = sc.nextLine();
+        
+        System.out.print("Enter electricity usage (in units): ");
+        int usage = sc.nextInt();
+        
+        // Convert area to boolean for easier logical operations
+        boolean isRural = area.equalsIgnoreCase("Rural");
+        boolean isUrban = area.equalsIgnoreCase("Urban");
+        
+        // Check subsidy eligibility using logical AND (&&)
+        boolean eligibleForSubsidy = isRural && (usage < 100);
+        
+        // Check surcharge requirement using logical OR (||)
+        boolean requiresSurcharge = isUrban || (usage > 500);
+        
+        // Display results in required format
+        if (eligibleForSubsidy) {
+            System.out.println("Customer is eligible for Subsidy.");
+        } else {
+            System.out.println("Customer is not eligible for Subsidy.");
+        }
+        
+        if (requiresSurcharge) {
+            System.out.println("Surcharge applicable.");
+        } else {
+            System.out.println("No Surcharge.");
+        }
+        
+        sc.close();
+    }
+}
