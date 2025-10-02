@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+public class SwapFirstLastDigit {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int n = sc.nextInt();
+
+        if (n >= 0 && n < 10) {
+            System.out.println("Output: " + n);
+        } else {
+            int num = n;
+            int lastDigit = num % 10;
+            int firstDigit = num;
+
+            int digits = 0;
+            while (firstDigit >= 10) {
+                firstDigit /= 10;
+                digits++;
+            }
+
+            int middlePart = n % (int) Math.pow(10, digits);
+            int swapped = lastDigit * (int) Math.pow(10, digits) + middlePart - lastDigit + firstDigit;
+            
+            System.out.println("Output: " + swapped);
+        }
+
+        sc.close();
+    }
+}
