@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class AutoFare {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter distance travelled (in km): ");
+        int distance = sc.nextInt();
+        int fare;
+
+        if (distance <= 2) {
+            fare = 30;
+        } else if (distance <= 5) {
+            fare = 50;
+        } else if (distance <= 10) {
+            fare = 80;
+        } else {
+            fare = 100 + (distance - 10) * 10;
+        }
+
+        System.out.println("Fare: ₹" + fare);
+        sc.close();
+    }
+}
