@@ -1,0 +1,40 @@
+import java.util.Scanner;
+
+public class BonusCalculator {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Base Salary: ");
+        double baseSalary = sc.nextDouble();
+        sc.nextLine(); // consume newline
+
+        System.out.print("Enter Performance Rating (Excellent/Good/Average/Poor): ");
+        String rating = sc.nextLine();
+
+        double adjustedSalary = baseSalary;
+        int bonus = 0;
+
+        if (rating.equalsIgnoreCase("Excellent")) {
+            adjustedSalary = baseSalary + baseSalary * 0.20;
+            bonus = 10000;
+        } else if (rating.equalsIgnoreCase("Good")) {
+            adjustedSalary = baseSalary + baseSalary * 0.10;
+            bonus = 5000;
+        } else if (rating.equalsIgnoreCase("Average")) {
+            adjustedSalary = baseSalary + baseSalary * 0.05;
+            bonus = 2000;
+        } else if (rating.equalsIgnoreCase("Poor")) {
+            adjustedSalary = baseSalary; 
+            bonus = 0;
+        } else {
+            System.out.println("Invalid performance rating entered.");
+            sc.close();
+            return;
+        }
+
+        System.out.println("Adjusted Salary: " + (int)adjustedSalary);
+        System.out.println("Bonus: " + bonus);
+
+        sc.close();
+    }
+}
