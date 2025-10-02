@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class AscendingDigitsCheck {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int n = sc.nextInt();
+
+        int prevDigit = 10; // set to a value greater than any digit (0-9)
+        int temp = n;
+        boolean ascending = true;
+
+        // extract digits from left to right
+        int divisor = 1;
+        while (temp / divisor >= 10) {
+            divisor *= 10;
+        }
+
+        while (divisor > 0) {
+            int currentDigit = temp / divisor;
+            if (currentDigit < prevDigit) {
+                prevDigit = currentDigit;
+            } else if (currentDigit < prevDigit) {
+                ascending = false;
+                break;
+            } else {
+                prevDigit = currentDigit;
+            }
+            temp %= divisor;
+            divisor /= 10;
+        }
+
+        if (ascending) {
+            System.out.println("Digits are in ascending order");
+        } else {
+            System.out.println("Digits are not in ascending order");
+        }
+
+        sc.close();
+    }
+}
