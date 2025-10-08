@@ -1,0 +1,110 @@
+class books {
+private String Title;
+private String Author;
+public boolean isAvailable;
+
+books(String Title , String Author){
+    this.Title = Title;
+    this.Author = Author;
+    this.isAvailable = true;
+}
+public String getTitle(){
+    return this.Title;
+}
+public String getAuthor(){
+    return this.Author;
+}
+public boolean isAvailable(){
+    return this.isAvailable;
+}
+
+public void setAvailable(boolean Available){
+    this.isAvailable = Available;
+}
+}
+class Person{
+    String Name;
+    String id;
+
+    public Person(String name, String id){
+        this.Name = name;
+        this.id = id;
+    }
+}
+
+class Student extends Person{
+    String Course;
+    public Student(String Name , String id ,String course){
+        super(Name, id);
+        this.Course = course;
+    }
+}
+
+class Teacher extends Person{
+    String Department;
+
+    public Teacher(String Name , String id , String department){
+        super(Name , id);
+        this.Department = department;
+    }
+}
+
+
+
+class libraryManagement {
+    public void issuebook(books books , Student Student){
+        if(books.isAvailable()){
+            books.setAvailable(false);
+            System.out.println("Book " + books.getTitle() + " Issued to student: " + Student.Name + " ID:"+ Student.id);
+        }
+        else{
+            System.out.println("Book is not Avaiable.");
+        }
+    }
+    public void issuebook(books books, Teacher Teacher){
+        if(books.isAvailable()){
+            books.setAvailable(false);
+            System.out.println("Book " + books.getTitle() + " Issued to Teacher: " + Teacher.Name + " ID:" + Teacher.id);
+        }
+        else{
+            System.out.println("Book is not Avaiable.");
+        }
+    }
+}
+
+class Student_User extends Student {//implements User{
+    public Student_User(String Name ,String id , String Course){
+        super(Name , id , Course);
+    }
+    public void borrowbook(books books , libraryManagement library){
+        library.issuebook(books , this);
+    }
+}
+
+class Teacher_User extends Teacher {//implements User{
+    public Teacher_User(String Name ,String id , String Department){
+        super(Name , id , Department);
+    }
+    public void borrowbook(books books , libraryManagement library){
+        library.issuebook(books , this);
+    }
+}
+public class Library {
+    public static void main(String[] args) {
+        libraryManagement JAIN_Library = new libraryManagement();
+        
+        books b1 = new books("Java Progarmming","James Gosling");
+        books b2 = new books("Data Strucutres","Robert Lafore");
+        
+        Student_User s1 = new Student_User("Manish" , "24BTRCN096","Computer Science And Engineering-General");
+        Student_User s2 = new Student_User("Madhu", "24BTRCN020","CSE-GEN");
+        Teacher_User t1 = new Teacher_User("ABC", "23SVSEDV","CSE");
+        Teacher_User t2 = new Teacher_User("DEF","24dsbsdb","Mathematics");
+
+
+        s1.borrowbook(b1, JAIN_Library);
+        t1.borrowbook(b2, JAIN_Library);
+        s2.borrowbook(b1, JAIN_Library);
+        t2.borrowbook(b2, JAIN_Library);
+    }
+}
